@@ -1,0 +1,7 @@
+# Dados coletados e qualquer coisa com credenciais nunca entram no repositório
+data/
+*.local.json
+*.log
+.env
+*credentials*
+*auth.json
