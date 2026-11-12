@@ -40,6 +40,10 @@ Run do Orca: `run_e29986923056`
   - Cursor está com login expirado e não entrega dados hoje.
   - Passar o mouse numa skin que muda de altura exige atraso para não tremular.
 
+## Requisitos acrescentados
+
+- Provedores extensíveis: incluir novos serviços (DeepSeek, GLM, MiniMax, a definir) deve ser criar um arquivo de provedor e uma entrada de configuração, sem mexer na skin. Enviado a Jayla (arquitetura do coletor) e Miiaq (lista dinâmica e linha de saldo para APIs pagas por uso).
+
 ## Pendências do usuário
 
 - Refazer o login do Cursor (`cursor-agent login`) para que ele tenha dados.
