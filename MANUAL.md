@@ -1,5 +1,17 @@
 # Manual de uso — LLM Usage Widget
 
+## Configurar contas pelo menu
+
+Na pasta do projeto, dê dois cliques em **Configurar-provedores.cmd**. Também é possível abrir um PowerShell na pasta e executar `py -3 scripts/configurar_provedores.py`.
+
+1. Escolha **1** para listar contas, conferir se estão ativas e visíveis, e ver ordem e intervalo.
+2. Escolha **2**, selecione a conta pelo número e use o submenu para ativar/desativar, mostrar/ocultar, ajustar intervalo, ordem ou nome. Para Claude, há também a opção de informar o **caminho** do arquivo de credenciais; não digite o token.
+3. Para uma API monetária, o submenu permite informar orçamento local, moeda e identificador de período. O percentual só aparece se o provedor fornecer gasto compatível com a moeda, o período e o escopo; o orçamento não impõe limite de cobrança.
+4. Para adicionar uma conta, escolha **3**, digite nome, identificador simples (como `deepseek_api`) e tipo. A conta é criada desativada. Para cota percentual, o assistente cria um arquivo de modelo em `collector/providers/`. Para APIs monetárias, usa o modelo genérico.
+5. **Criar a entrada não conecta automaticamente o serviço.** Um desenvolvedor precisa implementar e validar a consulta real do plugin; até lá, a conta não exibirá dados reais. Depois de pronta, ative-a pelo menu. Os modelos não pedem nem salvam chaves de API.
+
+Cada alteração é salva em `%LOCALAPPDATA%\LLMUsageWidget\config.json`; o coletor em execução lê a configuração no ciclo seguinte. Use **0** para sair. Para encerrar sem alterar durante a escolha de conta, pressione Enter.
+
 ## Visão geral
 Este repositório contém a skin Rainmeter e o **coletor** independente do processo/CLI do Orca. Ele lê fontes de uso **somente leitura** (sem gerar uso pago e sem renovar tokens) e publica um snapshot JSON contrato v1 para consumo pela skin Rainmeter.
 
