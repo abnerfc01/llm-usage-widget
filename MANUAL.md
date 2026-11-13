@@ -1,7 +1,7 @@
-# Manual de uso — LLM Usage Widget (backend/coletor v1)
+# Manual de uso — LLM Usage Widget
 
 ## Visão geral
-Este repositório contém o **coletor** (backend) independente do processo/CLI do Orca. Ele lê fontes de uso **somente leitura** (sem gerar uso pago e sem renovar tokens) e publica um snapshot JSON contrato v1 para consumo pela skin Rainmeter.
+Este repositório contém a skin Rainmeter e o **coletor** independente do processo/CLI do Orca. Ele lê fontes de uso **somente leitura** (sem gerar uso pago e sem renovar tokens) e publica um snapshot JSON contrato v1 para consumo pela skin Rainmeter.
 
 - Código: `collector/` (plugins em `collector/providers/`)
 - Config exemplo: `examples/config.example.json`
@@ -21,7 +21,7 @@ Este repositório contém o **coletor** (backend) independente do processo/CLI d
 - Loop em primeiro plano (intervalo em segundos, padrão 300): `py -3 -m collector collect-loop --interval 300`
 - Snapshot válido pode ser inspecionado em `%LOCALAPPDATA%\LLMUsageWidget\snapshot.json`.
 
-> Não instale agendamento/serviço automaticamente nesta fase. Se quiser agendar, faça manualmente (ex.: Tarefa Agendada) apontando para o comando acima — operação reversível (basta remover a tarefa).
+> A inicialização automática desta máquina já foi configurada após a aprovação nativa. Não crie uma segunda instância do loop.
 > O caminho `snapshot_path` no config suporta expansão de `%LOCALAPPDATA%` e deve resultar em caminho absoluto; caminhos relativos são rejeitados para evitar gravação acidental no repo/OneDrive.
 
 ## Leitura das barras, cores e estados (alinhado ao contrato/design)
@@ -60,3 +60,40 @@ Para adicionar provedor: criar `collector/providers/<nome>.py` com `collect(cfg,
 
 O retorno do plugin deve conter apenas chaves permitidas em `data` (`quotas`/`money` com subcampos validados); chaves extras são descartadas.
 
+
+## Instalação definitiva nesta máquina — 12/11/2026
+
+- Skin: C:\Users\Abner\OneDrive\Documentos\Rainmeter\Skins\LLMUsage\LLMUsage.ini.
+- Coletor: D:\code\llm-usage-widget. Preserve a pasta enquanto a tarefa apontar para ela.
+- Dados/configuração: %LOCALAPPDATA%\LLMUsageWidget\snapshot.json e config.json, fora do OneDrive.
+- Tarefa Windows: LLMUsageWidget-Collector. Inicia no login do usuário com pythonw.exe em segundo plano, sem janela ou Orca. Verifica o ciclo a cada 60 segundos; os provedores respeitam o prazo individual, padrão 600 segundos.
+- Posição inicial da skin: X=3220, Y=420, acima do relógio existente. Pode ser arrastada. LLMUsage-Validation permanece desativada.
+- As skins illustro existentes foram preservadas.
+
+### Leitura e interação
+
+Passe o mouse sobre uma conta para abrir a prévia; clique para fixar e novamente para recolher. Use setas para páginas e a roda na gaveta para detalhes adicionais. As cores mudam em 25%, 50%, 75% e 90% de consumo. Só aparecem janelas realmente informadas pela fonte. Ausência de dado nunca significa 0%.
+
+APIs monetárias exibem gasto/saldo. Quando há orçamento local compatível, mostram gasto curto e percentual; total e período ficam na gaveta/tooltip. Orçamento local não limita cobranças na API.
+
+### Limitações atuais
+
+Na coleta de 12/11 às 22:07 (America/Sao_Paulo), Codex retornou duas janelas; Claude retornou auth_expired; Antigravity, OpenCode Go e Cursor retornaram unsupported. Estes três ainda não têm fonte independente comprovada. O Claude requer autenticação válida na ferramenta oficial ou fonte local válida configurada; o coletor não renova tokens.
+
+### Parar, retomar ou remover
+
+No Agendador de Tarefas, procure LLMUsageWidget-Collector. Comandos PowerShell:
+
+    Stop-ScheduledTask -TaskName 'LLMUsageWidget-Collector'
+    Disable-ScheduledTask -TaskName 'LLMUsageWidget-Collector'
+
+Para retomar:
+
+    Enable-ScheduledTask -TaskName 'LLMUsageWidget-Collector'
+    Start-ScheduledTask -TaskName 'LLMUsageWidget-Collector'
+
+Para remover a inicialização definitivamente, pare a tarefa e execute:
+
+    Unregister-ScheduledTask -TaskName 'LLMUsageWidget-Collector' -Confirm:$false
+
+Para ocultar a skin: botão direito nela → Descarregar skin. Para reabrir: Gerenciar Rainmeter → LLMUsage → LLMUsage.ini → Carregar. Isso não afeta outros widgets. Preserve arquivos/configuração caso queira retomá-la; não apague a pasta geral do Rainmeter.
