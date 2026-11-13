@@ -5,3 +5,10 @@ data/
 .env
 *credentials*
 *auth.json
+
+# Artefatos locais de Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+*.tmp

@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "_comment": "snapshot_path supports %LOCALAPPDATA% expansion and must resolve to an absolute path. Copying this file as-is works because the collector expands environment variables.",
+  "snapshot_path": "%LOCALAPPDATA%\\LLMUsageWidget\\snapshot.json",
+  "providers": [
+    {
+      "id": "claude",
+      "plugin": "claude",
+      "display_name": "Claude",
+      "kind": "quota",
+      "enabled": true,
+      "visible": true,
+      "order": 10,
+      "collection_interval_seconds": 600,
+      "credential_ref": "claude_default",
+      "credential_source": "local_oauth"
+    },
+    {
+      "id": "codex",
+      "plugin": "codex",
+      "display_name": "Codex",
+      "kind": "quota",
+      "enabled": true,
+      "visible": true,
+      "order": 20,
+      "collection_interval_seconds": 600,
+      "credential_ref": "codex_default"
+    },
+    {
+      "id": "antigravity",
+      "plugin": "antigravity",
+      "display_name": "Antigravity",
+      "kind": "quota",
+      "enabled": true,
+      "visible": true,
+      "order": 30,
+      "collection_interval_seconds": 600,
+      "credential_ref": "antigravity_default"
+    },
+    {
+      "id": "opencode_go",
+      "plugin": "opencode_go",
+      "display_name": "OpenCode Go",
+      "kind": "quota",
+      "enabled": true,
+      "visible": true,
+      "order": 40,
+      "collection_interval_seconds": 600,
+      "credential_ref": "opencode_go_default"
+    },
+    {
+      "id": "cursor",
+      "plugin": "cursor",
+      "display_name": "Cursor",
+      "kind": "quota",
+      "enabled": true,
+      "visible": true,
+      "order": 50,
+      "collection_interval_seconds": 600,
+      "credential_ref": "cursor_default"
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+// Example (no secrets): future metered API provider with local budget reference.
+// Budgets are local references (source: local_config), never provider-enforced limits.
+// credential_ref resolves outside this file (env/OS secret store/user file outside repo & OneDrive).
+{
+  "id": "deepseek_api",
+  "plugin": "metered_generic",
+  "display_name": "DeepSeek API",
+  "kind": "metered",
+  "enabled": false,
+  "visible": true,
+  "order": 60,
+  "collection_interval_seconds": 900,
+  "credential_ref": "deepseek_api_key_ref",
+  "budget": {
+    "amount": "20.00",
+    "currency": "USD",
+    "period": { "id": "2026-11", "label": "Novembro" },
+    "source": "local_config"
+  }
+}
+
