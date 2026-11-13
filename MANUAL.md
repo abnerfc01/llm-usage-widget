@@ -50,7 +50,8 @@ A interação (prévia no hover com atrasos, clique para fixar, gaveta) é respo
 - **Claude**: leitura direta somente leitura (OAuth usage), **sem refresh**. Fonte configurável: `credentials_path` explícito na config; senão `~/.claude/.credentials.json`; se ausente/expirado, fallback read-only a perfil gerenciado localmente (`%APPDATA%\orca\claude-profiles\*\home\.credentials.json`) sem processo/CLI Orca e sem copiar token. Se nenhuma credencial válida encontrada → `auth_expired`/`missing_credential`.
 - **Codex**: leitura direta via `~/.codex/auth.json` (endpoint de uso). Sem refresh.
 - **Antigravity**: consulta de cotas independente do Orca via credencial local do Windows, sem renovar tokens. Se aparecer `auth_expired`, abra o Antigravity para renovar a sessão ou entre novamente pela ferramenta oficial.
-- **OpenCode Go / Cursor**: sem fonte independente verificada nesta fase → `unsupported` ou `missing_credential`. Cursor pode exigir `cursor-agent login` quando aplicável.
+- **OpenCode Go**: consulta de cotas independente do Orca usando a credencial local da ferramenta. Se aparecer `missing_credential` ou `auth_expired`, confira o login no OpenCode.
+- **Cursor**: sem fonte independente verificada nesta fase → `unsupported` ou `missing_credential`.
 - **Disabled**: `enabled=false` não gera alerta (`error=null`, `state=disabled`, `last_attempt_result=never`); a skin pode omitir ou mostrar como desativado.
 - Falhas são isoladas por provedor; um provedor com erro não apaga o último sucesso dos demais nem o seu próprio último dado válido. Agendamento por provedor (`next_attempt_at`), com backoff em erro e sem forjar `last_attempt_at` em tentativas puladas/disabled. Providers são executados com timeout isolado (processo terminado em estouro).
 - **Validação de payload**: o coletor aplica allowlist estrita em `data` e valida tipos; chaves desconhecidas (ex. tokens brutos) são descartadas e o provedor é marcado como `invalid_response`, sem afetar os demais.
@@ -91,7 +92,7 @@ APIs monetárias exibem gasto/saldo. Quando há orçamento local compatível, mo
 
 ### Limitações atuais
 
-Na coleta de 13/11 (America/Sao_Paulo), Claude e Antigravity retornaram dados das janelas de 5 horas e semanal. Codex também possui integração de leitura. OpenCode Go e Cursor ainda não têm fonte independente comprovada. Claude e Antigravity precisam de sessões válidas nas respectivas ferramentas oficiais; o coletor não renova tokens.
+Na coleta de 13/11 (America/Sao_Paulo), Claude, Codex, Antigravity e OpenCode Go retornaram dados. OpenCode Go fornece janelas de 5 horas, semanal e mensal. Cursor ainda não tem fonte independente comprovada. Os provedores precisam de credenciais válidas nas ferramentas oficiais; o coletor não renova tokens.
 
 ### Parar, retomar ou remover
 
