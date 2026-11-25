@@ -1,5 +1,13 @@
 # Manual de uso — LLM Usage Widget
 
+
+<p align="left">
+  <a href="https://github.com/abnerfc01/llm-usage-widget/releases"><img alt="Release" src="https://img.shields.io/github/v/release/abnerfc01/llm-usage-widget?include_prereleases&style=flat-square&color=1a7f37"></a>
+  <img alt="Python" src="https://img.shields.io/badge/python-3.8%2B-1a7f37?style=flat-square&logo=python&logoColor=white">
+  <img alt="Status" src="https://img.shields.io/badge/status-em%20desenvolvimento-orange?style=flat-square">
+  <a href="https://github.com/abnerfc01/llm-usage-widget/commits/main"><img alt="Last commit" src="https://img.shields.io/github/last-commit/abnerfc01/llm-usage-widget?style=flat-square&color=1a7f37"></a>
+</p>
+
 ## Configurar contas pelo menu
 
 Na pasta do projeto, dê dois cliques em **Configurar-provedores.cmd**. Também é possível abrir um PowerShell na pasta e executar `py -3 scripts/configurar_provedores.py`.
